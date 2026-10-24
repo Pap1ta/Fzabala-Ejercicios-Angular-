@@ -1,0 +1,45 @@
+<section class="card">
+  <h2>FormGroup</h2>
+
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <label for="first-name">Nombre: </label>
+    <input id="first-name" type="text" formControlName="firstName" required />
+
+    <label for="last-name">Apellido: </label>
+    <input id="last-name" type="text" formControlName="lastName" />
+
+    <div formGroupName="address">
+      <h3>Dirección</h3>
+
+      <label for="street">Calle: </label>
+      <input id="street" type="text" formControlName="street" />
+
+      <label for="city">Ciudad: </label>
+      <input id="city" type="text" formControlName="city" />
+
+      <label for="state">Provincia: </label>
+      <input id="state" type="text" formControlName="state" />
+
+      <label for="zip">Código postal: </label>
+      <input id="zip" type="text" formControlName="zip" />
+    </div>
+
+    <div formArrayName="aliases">
+      <h3>Alias</h3>
+      <button type="button" (click)="addAlias()">+ Agregar alias</button>
+
+      @for (alias of aliases.controls; track $index) {
+        <label for="alias-{{ $index }}">Alias: </label>
+        <input id="alias-{{ $index }}" type="text" [formControlName]="$index" />
+      }
+    </div>
+
+    <div class="actions">
+      <button type="button" (click)="updateProfile()">Actualizar perfil</button>
+      <button type="submit" [disabled]="!profileForm.valid">Enviar</button>
+    </div>
+  </form>
+
+  <p>Estado del formulario: {{ profileForm.status }}</p>
+  <p>Valor del formulario: {{ profileForm.value | json }}</p>
+</section>

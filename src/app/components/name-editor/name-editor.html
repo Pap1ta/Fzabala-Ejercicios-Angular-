@@ -1,0 +1,10 @@
+<section class="card">
+  <h2>FormControl</h2>
+
+  <label for="name">Nombre: </label>
+  <input id="name" type="text" [formControl]="name" />
+
+  <p>Valor: {{ name.value }}</p>
+
+  <button type="button" (click)="updateName()">Actualizar nombre</button>
+</section>
